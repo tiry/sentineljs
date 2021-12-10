@@ -2,11 +2,18 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+const cors = require('cors');
+const fileUpload = require('express-fileupload');
 
 var apiRouter = require('./routes/api');
 var healthcheckRouter = require('./routes/healthcheck');
 
 var app = express();
+
+// init file upload middleware
+app.use(fileUpload());
+// init CORS to make my life simpler
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

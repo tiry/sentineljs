@@ -31,11 +31,26 @@ It seems (for now) like a good choice because:
 #### Step1 - Bootstrap
 
 Initialize the app skeleton.
+
 Use `express-generator` for that and cleanup everything that is not needed.
 
+Only expose 2 endpoints:
 
+ - API endpoint
+ - healthcheck endpoint
+
+Both  implementations are for now empty.
 
 #### Step2 - Unable file upload
+
+Added a few modulees to help handling file upload ( [ref](https://attacomsian.com/blog/uploading-files-nodejs-express)):
+
+ - express-fileupload
+ - cors (not I will need this, but likely to make testing easier)
+
+Upload seems to work.
+Did not add any specific security check (like type or size): should be ideally handled at the WAF/API Gateway level.
+
 
 
 
