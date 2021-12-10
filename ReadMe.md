@@ -41,7 +41,7 @@ Only expose 2 endpoints:
 
 Both  implementations are for now empty.
 
-#### Step2 - Unable file upload
+#### Step2 - Enable file upload
 
 Added a few modulees to help handling file upload ( [ref](https://attacomsian.com/blog/uploading-files-nodejs-express)):
 
@@ -50,6 +50,23 @@ Added a few modulees to help handling file upload ( [ref](https://attacomsian.co
 
 Upload seems to work.
 Did not add any specific security check (like type or size): should be ideally handled at the WAF/API Gateway level.
+
+#### Step3 - Add services
+
+ - Implementing a dummy version of the storage service 
+    - basically just define the "interface" and the flow
+ - Implement the fake opencv service
+    - just returns randomized hard-coded data
+ - Add some unit tests
+    - Add Mocha and Chai to have minimal support for unit tests.
+
+For now, everything is synchronous, but it will probably need to change.
+ 
+May want to take a look at [opencv-express](https://github.com/justadudewhohacks/opencv-express), but for now, the fake impl should be enough.
+
+#### Step4
+
+
 
 
 

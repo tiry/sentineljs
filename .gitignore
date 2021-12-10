@@ -1,3 +1,9 @@
+# project specific stuff
+
+# do not commit temp files
+
+./store/*
+
 # Logs
 logs
 *.log
