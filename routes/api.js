@@ -36,7 +36,7 @@ async function saveCassette(cassette, req, res) {
     
   }
 
-api.post('/uploadFile', async function(req, res, next) {
+api.post('/runcv', async function(req, res, next) {
 
     let cassette;
     let uploadPath;
@@ -45,7 +45,13 @@ api.post('/uploadFile', async function(req, res, next) {
       return res.status(400).send('Give me the cassette!!!');
     }
   
+    //console.log(req.files);
+
     cassette = req.files.cassette;
+    // when doing the upload via react frontend the name is not set
+    if (cassette==null) {
+        cassette= req.files.file;
+    }
  
     // persist the data
     key = await saveCassette(cassette, req, res);

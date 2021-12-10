@@ -18,7 +18,7 @@ function mkRandomFile() {
 
 describe('test sentinel API', function () {
     it('uploadFile ', function (done) {
-        request.post('/uploadFile')
+        request.post('/runcv')
             .set( "User-Agent", "unit-test")
             .field('Content-Type', 'multipart/form-data')
             //.attach('cassette', './test/cassette.jpg')
