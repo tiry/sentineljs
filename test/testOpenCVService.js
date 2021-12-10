@@ -6,10 +6,11 @@ var assert = require('chai').assert;
 describe('Verify mock OpenCV service runs', function() {
 
     it('Simulate call to service', function() {
-
-        bboxes = opencv.getBoundingBoxes(null);
-          assert.isAbove(bboxes.boxes.length, 0, "Result should contain at least one box");
-          assert.isNotNull(bboxes.errors, "error field should be defined");
+        opencv.getBoundingBoxes(null).then(function (bboxes) {
+            assert.isAbove(bboxes.boxes.length, 0, "Result should contain at least one box");
+            assert.isNotNull(bboxes.errors, "error field should be defined");
+    
+        });
     });
 
 });
