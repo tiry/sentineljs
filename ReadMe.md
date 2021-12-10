@@ -180,6 +180,14 @@ Once you have built locally the image, you should be able to run the docker-comp
 
 Server endpoint will be available on port 3000
 
+### Step9: write-up
+
+See [deployment-arch.md] for some details about:
+
+ - deployment architecture
+ - scalability concerns
+ - security & reproductibility
+
 
 
 
