@@ -55,9 +55,16 @@ api.post('/uploadFile', async function(req, res, next) {
     bboxes = await opencv.getBoundingBoxes();
 
     // may be save Bboxes for futur references ?
+    
+
+    if (req.get('User-Agent')=="unit-test"){
+        console.log("called from unit tests: let's add some stuff")
+        bboxes.key=key;
+    }
 
     res.send(bboxes);
-     
+    
+
 });
 
 module.exports = api;

@@ -141,6 +141,17 @@ We use the "cassette picture"'s digest as a key for the object `_id`: this way t
 
 MongoDB js client is async, so services need to be async too: will use the async/await pattern as much as posssible to avoid mixing models.
 
+### Step6: Plug API and Storage services.
+
+Let's try to have everyone playing together ...
+
+Added a end-to-end test.
+
+Needed to have the test generating a fake random file because otherwise, the MongoDB storage will fail with:
+
+    MongoServerError: E11000 duplicate key error collection: sentinel.cassettes index: _id_ dup key
+
+Generally, I think the behaviour makes sense: in the real life, even 2 pictures of the same scene takes a few ms appart will have different md5 (meta-data change + noise in the image), so this only an issue for unit testing ...
 
 
 

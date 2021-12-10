@@ -41,7 +41,10 @@ var helper = require('./bboxHelper');
 
 // generate random bounding boxes based on the provided data sample
 function _getRandomBoundingBoxesFromFakeData() {
-    nbBBoxes=1 + Math.floor( Math.random() * 3);
+    
+    //nbBBoxes=1 + Math.floor( Math.random() * 3);
+    // not supposed to be randomized :)
+    nbBBoxes=3;
 
     idx=[];
     bboxes=[]
