@@ -153,7 +153,20 @@ Needed to have the test generating a fake random file because otherwise, the Mon
 
 Generally, I think the behaviour makes sense: in the real life, even 2 pictures of the same scene takes a few ms appart will have different md5 (meta-data change + noise in the image), so this only an issue for unit testing ...
 
+### Step7: Plug HealthCheck
 
+Healthcheck API are needed to run in prod, for now I only check the storage service availability.
+In "real life", we should separate `liveness` from `readyness` but here, because the only things that needs to be ready and alive are S3 and MongoDB, they are pointing to the same check.
+
+Global status is available on `http://127.0.0.1:3000/healthcheck/status`
+
+Should typically be something like:
+
+    {
+    "globalStatus": true,
+    "s3Ready": true,
+    "mongoReady": true
+    }
 
 
 

@@ -17,6 +17,21 @@ function getMongoClient () {
     return new MongoClient(uri);
 }
 
+async function checkAvailable() {
+    client = getMongoClient();
+    try {
+        client = await client.connect();
+    
+        database = client.db(config.db.name);
+        cassettes = database.collection(config.db.collection);
+        client.close();
+        return true;
+    } catch(err) {
+        console.log(err);
+        return false;
+    }
+}
+
 async function saveJsonToMongo(metadata) {
         
     client = getMongoClient();
@@ -48,5 +63,7 @@ module.exports = {
 
     saveMetaData: (metadata)  => {        
         return saveJsonToMongo(metadata);
-    }
+    },
+
+    checkAvailable:checkAvailable
 }
