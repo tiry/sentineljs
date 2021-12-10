@@ -55,8 +55,7 @@ function _getRandomBoundingBoxesFromFakeData() {
     return bboxes;
 }
 
-// XXX should probably be async in real life
-function _getBoundingBoxes(imageFile) {
+async function _getBoundingBoxes(imageFile) {
         
     bboxes=_getRandomBoundingBoxesFromFakeData();
     

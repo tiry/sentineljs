@@ -5,11 +5,11 @@ var opencv = require('../backend/opencvService');
 var api = express.Router();
 
 
-function saveCassette(cassette, req, res) {
+async function saveCassette(cassette, req, res) {
 
     try {
       // use blob digest as key to easily do de-dup
-      // md5 is good enough for that purpose
+      // md5 is good enough for that purpose (XXX async?)
       blobStorePath = store.saveBlob(cassette, cassette.md5);
 
       // extend the meta-data 
@@ -24,8 +24,8 @@ function saveCassette(cassette, req, res) {
         userAgent: req.get('User-Agent'),
         IP: req.socket.remoteAddress
       }
-      // save in the "metadata store"
-      key = store.saveMetaData(metadata);
+      // save in the "metadata store" (async!)
+      key = await store.saveMetaData(metadata);
       
       return key;
 
@@ -36,7 +36,7 @@ function saveCassette(cassette, req, res) {
     
   }
 
-api.post('/uploadFile', function(req, res, next) {
+api.post('/uploadFile', async function(req, res, next) {
 
     let cassette;
     let uploadPath;
@@ -48,10 +48,11 @@ api.post('/uploadFile', function(req, res, next) {
     cassette = req.files.cassette;
  
     // persist the data
-    saveCassette(cassette, req, res);
+    key = await saveCassette(cassette, req, res);
+    console.log("data saved using key " + key);
 
     // call service
-    bboxes = opencv.getBoundingBoxes();
+    bboxes = await opencv.getBoundingBoxes();
 
     // may be save Bboxes for futur references ?
 
