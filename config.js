@@ -22,4 +22,16 @@ config.blobStore.bucket=process.env.BLOBSTORE_BUCKET || "cassettes";
 config.db = {}
 //****** Database configuration
 
+config.db.type = process.env.DB_TYPE || "dummy";
+config.db.type = process.env.DB_TYPE || "mongodb";
+
+// should define a config.db.uri to point to a cluster!
+config.db.server = process.env.DB_SERVER || "127.0.0.1";
+config.db.port = process.env.DB_PORT || "27017";
+config.db.name = process.env.DB_NAME || "sentinel";
+config.db.collection = process.env.DB_COLLECTION || "cassettes";
+
+config.db.user = process.env.DB_USER || "root";
+config.db.password = process.env.DB_PWD || "secret";
+
 module.exports=config;

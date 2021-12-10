@@ -100,6 +100,50 @@ I initially tried to use `@aws-sdk/client-s3` but falled back to `aws-sdk`: it s
 
 Need to add support for configuration: just used a `config.js` file.
 
+NB: the target bucket is consigured to be called "cassettes" and it needs to be created although the unit test will attempt to create it.
+
+NB2: XXX - Minio tests are not super stables and will sometimes fails, I think because of async behavior - will fix later.
+
+### Step5 - Add Meta-data persistence
+
+For meta-data persistence I will use MongoDB:
+
+ - native JSON store
+   - flexible schemas : can easily add new data after-the-fact
+ - scales
+    - scales up (memory/cpu)
+    - scales out via Sharding
+ - supports complex queries and aggregates (although not really needed at this point)
+
+The only drawback is that a producting ready MongoDB cluster is not that cheap especially when using Atlas or AWS DocumentDB.
+
+For dev, I will use a simple container deployment, basically using a single node MongoDB.
+
+Added `mongodb` package to the npm dependencies list.
+
+For testing, I use the default public MongoDB image and mongoexpress to do the initial setup:
+
+To start mongodb/mongo-express/minio locally:
+
+    docker-compose -f storage-stack.yaml up
+
+mongo-express Console will be available at http://127.0.0.1:8081 (root/secret)
+
+In terms of storage layout, the code uses:
+
+ - database: sentinel
+ - collection: cassettes
+
+The DB and the Collections need to be created using mongo-express.
+
+For now, the cassette data is stored as a single BSON object inside the `cassettes` collection.
+We use the "cassette picture"'s digest as a key for the object `_id`: this way the picture digest is the primary uniq key for both the blobstore and the db.
+
+MongoDB js client is async, so services need to be async too: will use the async/await pattern as much as posssible to avoid mixing models.
+
+
+
+
 
 
 
