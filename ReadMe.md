@@ -182,7 +182,7 @@ Server endpoint will be available on port 3000
 
 ### Step9: write-up
 
-See [deployment-arch.md] for some details about:
+See [deployment-arch.md](deployment-arch.md) for some details about:
 
  - deployment architecture
  - scalability concerns
