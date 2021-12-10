@@ -168,6 +168,19 @@ Should typically be something like:
     "mongoReady": true
     }
 
+### Step8: Docker 
+
+Added a Dockerfile, to run the build + tag:
+
+    ./docker-build.sh
+
+Once you have built locally the image, you should be able to run the docker-compose running everything together:
+
+    docker-compose -f stack.yaml up
+
+Server endpoint will be available on port 3000
+
+
 
 
 
